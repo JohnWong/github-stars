@@ -9,28 +9,26 @@
 import Foundation
 
 class ValueStore: Any {
-    static var sharedInstance = ValueStore()
     
     private static let KeyCode = "code"
     private static let KeyToken = "token"
+    private static let KeyScope = "scope"
     
-    var code: String? = NSUserDefaults.standardUserDefaults().objectForKey(ValueStore.KeyCode)?.stringValue {
+    static var code: String? = NSUserDefaults.standardUserDefaults().objectForKey(ValueStore.KeyCode) as? String {
         didSet {
             NSUserDefaults.standardUserDefaults().setObject(code, forKey: ValueStore.KeyCode)
         }
     }
     
-    var token: String? {
-        get {
-            if let _ = self.token {
-                return self.token
-            } else {
-                return NSUserDefaults.standardUserDefaults().objectForKey(ValueStore.KeyToken)?.stringValue
-            }
+    static var token: String? = NSUserDefaults.standardUserDefaults().objectForKey(ValueStore.KeyToken) as? String {
+        didSet {
+            NSUserDefaults.standardUserDefaults().setObject(token, forKey: ValueStore.KeyToken)
         }
-        set {
-            self.token = newValue
-            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: ValueStore.KeyToken)
+    }
+    
+    static var scope: String? = NSUserDefaults.standardUserDefaults().objectForKey(ValueStore.KeyScope) as? String {
+        didSet {
+            NSUserDefaults.standardUserDefaults().setObject(scope, forKey: ValueStore.KeyScope)
         }
     }
 

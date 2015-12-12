@@ -23,9 +23,13 @@ class ViewController: UIViewController {
 
     @IBAction func requestAuth(sender: AnyObject) {
         
-        let authUrl = "https://github.com/login/oauth/authorize?client_id=" + ConstValue.clientId + "&redirect_url=" + ConstValue.redirectUrl + "&scope=user:follow"
+        let authUrl = "https://github.com/login/oauth/authorize?client_id=" + ConstValue.clientId + "&redirect_url=" + ConstValue.redirectUrl + "&scope=user:follow,public_repo"
         UIApplication .sharedApplication().openURL(NSURL(string: authUrl)!)
         
+    }
+    
+    @IBAction func starRepo(sender: AnyObject) {
+        Starring.starRepo("")
     }
     
     deinit {
@@ -33,18 +37,40 @@ class ViewController: UIViewController {
     }
     
     func didGetCode() {
-        if let code = ValueStore.sharedInstance.code {
-            Alamofire.request(.POST, "https://github.com/login/oauth/access_token", parameters: ["client_id": ConstValue.clientId,
-                "client_secret": ConstValue.clientSecret,
-                "code": code])
+        if let code = ValueStore.code {
+            Alamofire.request(.POST, "https://github.com/login/oauth/access_token", parameters: [
+                    "client_id": ConstValue.clientId,
+                    "client_secret": ConstValue.clientSecret,
+                    "code": code
+                ],
+                encoding: .URL,
+                headers: [
+                    "Accept": "application/json"
+                ])
                 .response { request, response, data, error in
-                    print(request)
-                    print(response)
-                    print(data)
-                    print(error)
-        }
+                    var err: NSError? = nil
+                    if let _ = error {
+                        err = error
+                    } else if let data = data {
+                        print(String(data: data, encoding: NSUTF8StringEncoding))
+                        var result: Dictionary<String, String>?
+                        do {
+                            try result = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as? Dictionary<String, String>
+                            ValueStore.scope = result!["scope"]
+                            ValueStore.token = result!["access_token"]
+                        }
+                        catch let errorCatched as NSError {
+                            err = errorCatched
+                        }
+                    }
+                    if let _ = err {
+                        // TODO show error
+                        assert(false, "error")
+                    }
+            }
         } else {
             // Warning
+            assert(false, "error")
         }
         
     }

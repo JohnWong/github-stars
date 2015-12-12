@@ -48,11 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let index: String.Index = query.startIndex.advancedBy(5)
             if let _ = query.rangeOfString("code=") {
                 let code = query.substringFromIndex(index)
-                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: ConstValue.Notifications.didGetCode, object: nil))
-                ValueStore.sharedInstance.code = code
-            } else if let _ = query.rangeOfString("access_token=") {
-                let token = query.substringFromIndex(query.startIndex.advancedBy(13))
-                ValueStore.sharedInstance.token = token
+                ValueStore.code = code
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: ConstValue.Notifications.didGetCode, object: code))
             }
         }
         return true

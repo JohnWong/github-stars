@@ -18,10 +18,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKO-d8-SBF">
-                                <rect key="frame" x="74" y="60" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="37" y="20" width="98" height="30"/>
+                                <state key="normal" title="Grant Access"/>
                                 <connections>
                                     <action selector="requestAuth:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S4a-rb-s6u"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZS-Mr-Zp0">
+                                <rect key="frame" x="37" y="73" width="98" height="30"/>
+                                <state key="normal" title="Star Repo"/>
+                                <connections>
+                                    <action selector="starRepo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4vB-5V-VPT"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -30,6 +37,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="340" y="191"/>
         </scene>
     </scenes>
 </document>
