@@ -10,25 +10,42 @@ import Foundation
 
 class ValueStore: Any {
     
+    static let groupId = "group.com.johnwong.github"
     private static let KeyCode = "code"
     private static let KeyToken = "token"
     private static let KeyScope = "scope"
+    private static let userDefaults: NSUserDefaults = NSUserDefaults(suiteName: groupId)!
     
-    static var code: String? = NSUserDefaults.standardUserDefaults().objectForKey(ValueStore.KeyCode) as? String {
-        didSet {
-            NSUserDefaults.standardUserDefaults().setObject(code, forKey: ValueStore.KeyCode)
+    static var code: String? {
+        set {
+            userDefaults.setObject(code, forKey: ValueStore.KeyCode)
+            userDefaults.synchronize()
+        }
+        
+        get {
+            return userDefaults.objectForKey(ValueStore.KeyCode) as? String
         }
     }
     
-    static var token: String? = NSUserDefaults.standardUserDefaults().objectForKey(ValueStore.KeyToken) as? String {
-        didSet {
-            NSUserDefaults.standardUserDefaults().setObject(token, forKey: ValueStore.KeyToken)
+    static var token: String? {
+        set {
+            userDefaults.setObject(token, forKey: ValueStore.KeyToken)
+            userDefaults.synchronize()
+        }
+        
+        get {
+            return userDefaults.objectForKey(ValueStore.KeyToken) as? String
         }
     }
     
-    static var scope: String? = NSUserDefaults.standardUserDefaults().objectForKey(ValueStore.KeyScope) as? String {
-        didSet {
-            NSUserDefaults.standardUserDefaults().setObject(scope, forKey: ValueStore.KeyScope)
+    static var scope: String? {
+        set {
+            userDefaults.setObject(scope, forKey: ValueStore.KeyScope)
+            userDefaults.synchronize()
+        }
+        
+        get {
+            return userDefaults.objectForKey(ValueStore.KeyScope) as? String
         }
     }
 

@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func starRepo(sender: AnyObject) {
-        Starring.starRepo("")
+
     }
     
     deinit {

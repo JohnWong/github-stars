@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Share View Controller-->
@@ -20,21 +21,39 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kwp-Kt-oXd">
                                 <rect key="frame" x="230" y="275" width="140" height="50"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdq-FH-eaR">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdq-FH-eaR" userLabel="Main">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
                                         <subviews>
-                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Lfu-tt-4FG">
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Lfu-tt-4FG">
                                                 <rect key="frame" x="40" y="15" width="20" height="20"/>
                                             </activityIndicatorView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yzi-Nf-8p3">
+                                                <rect key="frame" x="20" y="10" width="60" height="30"/>
+                                                <state key="normal" title="Loading"/>
+                                                <connections>
+                                                    <action selector="tapMessage:" destination="j1y-V4-xli" eventType="touchUpInside" id="G6L-fN-X9s"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="L92-K8-TQV"/>
+                                            <constraint firstItem="yzi-Nf-8p3" firstAttribute="top" secondItem="fdq-FH-eaR" secondAttribute="top" constant="10" id="C6h-eC-4mz"/>
+                                            <constraint firstAttribute="bottom" secondItem="yzi-Nf-8p3" secondAttribute="bottom" constant="10" id="F2J-I7-9CJ"/>
+                                            <constraint firstItem="Lfu-tt-4FG" firstAttribute="centerY" secondItem="fdq-FH-eaR" secondAttribute="centerY" id="HwV-j7-XzQ"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="L92-K8-TQV"/>
+                                            <constraint firstItem="yzi-Nf-8p3" firstAttribute="centerY" secondItem="fdq-FH-eaR" secondAttribute="centerY" id="hJu-Tq-aVV"/>
+                                            <constraint firstAttribute="trailing" secondItem="yzi-Nf-8p3" secondAttribute="trailing" constant="20" id="hjE-n3-Q5g"/>
+                                            <constraint firstItem="yzi-Nf-8p3" firstAttribute="centerX" secondItem="fdq-FH-eaR" secondAttribute="centerX" id="hno-42-tgZ"/>
+                                            <constraint firstItem="Lfu-tt-4FG" firstAttribute="centerX" secondItem="fdq-FH-eaR" secondAttribute="centerX" id="ubY-WK-GzQ"/>
+                                            <constraint firstItem="yzi-Nf-8p3" firstAttribute="leading" secondItem="fdq-FH-eaR" secondAttribute="leading" constant="20" id="xK1-AV-NtI"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lg1-TA-GnV">
                                         <rect key="frame" x="100" y="0.0" width="40" height="50"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="Y7r-Vd-8K1"/>
+                                        </constraints>
                                         <state key="normal" title="X">
                                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -53,16 +72,15 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="KLK-Yy-Qi0" secondAttribute="bottom" id="2bj-WG-brX"/>
                                     <constraint firstItem="fdq-FH-eaR" firstAttribute="leading" secondItem="kwp-Kt-oXd" secondAttribute="leading" id="7gH-D1-mXn"/>
-                                    <constraint firstAttribute="width" constant="140" id="9wV-mi-1Vf"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="9wV-mi-1Vf"/>
                                     <constraint firstItem="lg1-TA-GnV" firstAttribute="leading" secondItem="fdq-FH-eaR" secondAttribute="trailing" id="Cao-d6-1Ct"/>
                                     <constraint firstItem="KLK-Yy-Qi0" firstAttribute="leading" secondItem="fdq-FH-eaR" secondAttribute="trailing" id="Cbl-wk-03K"/>
                                     <constraint firstItem="fdq-FH-eaR" firstAttribute="top" secondItem="kwp-Kt-oXd" secondAttribute="top" id="WAo-UV-rGC"/>
-                                    <constraint firstAttribute="height" constant="50" id="b5O-Ng-pUY"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="b5O-Ng-pUY"/>
                                     <constraint firstAttribute="bottom" secondItem="lg1-TA-GnV" secondAttribute="bottom" id="cxm-MA-5lx"/>
                                     <constraint firstAttribute="trailing" secondItem="lg1-TA-GnV" secondAttribute="trailing" id="i1t-K7-ggB"/>
                                     <constraint firstItem="lg1-TA-GnV" firstAttribute="top" secondItem="kwp-Kt-oXd" secondAttribute="top" id="nXH-Nd-LKq"/>
                                     <constraint firstAttribute="bottom" secondItem="fdq-FH-eaR" secondAttribute="bottom" id="rEU-ov-mam"/>
-                                    <constraint firstItem="lg1-TA-GnV" firstAttribute="leading" secondItem="fdq-FH-eaR" secondAttribute="trailing" id="sTC-ce-nMl"/>
                                     <constraint firstItem="KLK-Yy-Qi0" firstAttribute="top" secondItem="kwp-Kt-oXd" secondAttribute="top" id="y2q-RO-pg6"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -75,12 +93,15 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.16115301724137931" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="kwp-Kt-oXd" secondAttribute="trailing" constant="20" id="FGC-YQ-rAK"/>
+                            <constraint firstItem="kwp-Kt-oXd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wbc-yd-nQP" secondAttribute="leadingMargin" constant="20" id="N5P-N5-25a"/>
                             <constraint firstItem="kwp-Kt-oXd" firstAttribute="centerX" secondItem="wbc-yd-nQP" secondAttribute="centerX" id="SMQ-cH-5AE"/>
                             <constraint firstItem="kwp-Kt-oXd" firstAttribute="centerY" secondItem="wbc-yd-nQP" secondAttribute="centerY" id="tPK-uS-Lvt"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="Lfu-tt-4FG" id="DNN-PL-ojv"/>
+                        <outlet property="messageButton" destination="yzi-Nf-8p3" id="EBh-Ha-ig7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEy-Cv-SGf" userLabel="First Responder" sceneMemberID="firstResponder"/>
