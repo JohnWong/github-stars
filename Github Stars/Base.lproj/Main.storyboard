@@ -24,16 +24,12 @@
                                     <action selector="requestAuth:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S4a-rb-s6u"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZS-Mr-Zp0">
-                                <rect key="frame" x="37" y="73" width="98" height="30"/>
-                                <state key="normal" title="Star Repo"/>
-                                <connections>
-                                    <action selector="starRepo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4vB-5V-VPT"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="actionButton" destination="lKO-d8-SBF" id="woB-Pg-fSP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

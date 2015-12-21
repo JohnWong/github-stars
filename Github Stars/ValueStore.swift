@@ -18,7 +18,9 @@ class ValueStore: Any {
     
     static var code: String? {
         set {
-            userDefaults.setObject(code, forKey: ValueStore.KeyCode)
+            userDefaults.setObject(newValue, forKey: ValueStore.KeyCode)
+            userDefaults.removeObjectForKey(ValueStore.KeyScope)
+            userDefaults.removeObjectForKey(ValueStore.KeyToken)
             userDefaults.synchronize()
         }
         
@@ -29,7 +31,7 @@ class ValueStore: Any {
     
     static var token: String? {
         set {
-            userDefaults.setObject(token, forKey: ValueStore.KeyToken)
+            userDefaults.setObject(newValue, forKey: ValueStore.KeyToken)
             userDefaults.synchronize()
         }
         
@@ -40,7 +42,7 @@ class ValueStore: Any {
     
     static var scope: String? {
         set {
-            userDefaults.setObject(scope, forKey: ValueStore.KeyScope)
+            userDefaults.setObject(newValue, forKey: ValueStore.KeyScope)
             userDefaults.synchronize()
         }
         

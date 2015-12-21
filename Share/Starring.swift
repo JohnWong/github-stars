@@ -16,7 +16,8 @@ class Starring {
         let configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier("Test")
         configuration.sharedContainerIdentifier = ValueStore.groupId
         configuration.HTTPAdditionalHeaders = Manager.defaultHTTPHeaders
-        
+        configuration.timeoutIntervalForRequest = 10
+        configuration.timeoutIntervalForResource = 10
         return Manager(configuration: configuration)
     }()
     
@@ -36,19 +37,15 @@ class Starring {
                     ])
                 .response {
                     request, response, data, error in
-                    if let _ = error {
-                        dispatch_async(dispatch_get_main_queue(), {
-                            Void -> Void in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        if let _ = error {
                             print(error)
                             completion(error)
-                        })
-                    } else if let data = data {
-                        print(String(data: data, encoding: NSUTF8StringEncoding))
-                        dispatch_async(dispatch_get_main_queue(), {
-                            Void -> Void in
+                        } else if let data = data {
+                            print(String(data: data, encoding: NSUTF8StringEncoding))
                             completion(nil)
-                        })
-                    }
+                        }
+                    })
             }
         } else {
             dispatch_async(dispatch_get_main_queue(), {

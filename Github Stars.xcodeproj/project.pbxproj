@@ -18,7 +18,7 @@
 		5263EC231C1BE16C00668FAD /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5263EC221C1BE16C00668FAD /* ShareViewController.swift */; };
 		5263EC261C1BE16C00668FAD /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5263EC241C1BE16C00668FAD /* MainInterface.storyboard */; };
 		5263EC2A1C1BE16C00668FAD /* Share.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5263EC201C1BE16C00668FAD /* Share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		52C432091C25ADF900877734 /* Starring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5263EC0B1C1BB46300668FAD /* Starring.swift */; };
+		52A961581C28466E00755B14 /* Starring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A961571C28466E00755B14 /* Starring.swift */; };
 		52C4320A1C25AE0300877734 /* ValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521BC8041C19E986001D5421 /* ValueStore.swift */; };
 		52C4320E1C25B58E00877734 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C4320D1C25B58E00877734 /* Error.swift */; };
 		52C4320F1C25C33A00877734 /* ConstValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521BC8061C19F178001D5421 /* ConstValue.swift */; };
@@ -61,11 +61,11 @@
 		521BC7FE1C19E154001D5421 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		521BC8041C19E986001D5421 /* ValueStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueStore.swift; sourceTree = "<group>"; };
 		521BC8061C19F178001D5421 /* ConstValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstValue.swift; sourceTree = "<group>"; };
-		5263EC0B1C1BB46300668FAD /* Starring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Starring.swift; sourceTree = "<group>"; };
 		5263EC201C1BE16C00668FAD /* Share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		5263EC221C1BE16C00668FAD /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		5263EC251C1BE16C00668FAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		5263EC271C1BE16C00668FAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52A961571C28466E00755B14 /* Starring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Starring.swift; sourceTree = "<group>"; };
 		52C4320B1C25AE3000877734 /* Share.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Share.entitlements; sourceTree = "<group>"; };
 		52C4320C1C25AE3800877734 /* Github Stars.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Github Stars.entitlements"; sourceTree = "<group>"; };
 		52C4320D1C25B58E00877734 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
@@ -132,7 +132,6 @@
 				521BC7FE1C19E154001D5421 /* Info.plist */,
 				521BC8041C19E986001D5421 /* ValueStore.swift */,
 				521BC8061C19F178001D5421 /* ConstValue.swift */,
-				5263EC0B1C1BB46300668FAD /* Starring.swift */,
 			);
 			path = "Github Stars";
 			sourceTree = "<group>";
@@ -140,6 +139,7 @@
 		5263EC211C1BE16C00668FAD /* Share */ = {
 			isa = PBXGroup;
 			children = (
+				52A961571C28466E00755B14 /* Starring.swift */,
 				52C4320B1C25AE3000877734 /* Share.entitlements */,
 				5263EC221C1BE16C00668FAD /* ShareViewController.swift */,
 				5263EC241C1BE16C00668FAD /* MainInterface.storyboard */,
@@ -338,9 +338,9 @@
 			files = (
 				52C4320E1C25B58E00877734 /* Error.swift in Sources */,
 				5263EC231C1BE16C00668FAD /* ShareViewController.swift in Sources */,
+				52A961581C28466E00755B14 /* Starring.swift in Sources */,
 				52C4320A1C25AE0300877734 /* ValueStore.swift in Sources */,
 				52C4320F1C25C33A00877734 /* ConstValue.swift in Sources */,
-				52C432091C25ADF900877734 /* Starring.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,7 +418,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -457,7 +457,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

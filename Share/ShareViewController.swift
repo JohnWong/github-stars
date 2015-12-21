@@ -29,13 +29,7 @@ class ShareViewController: UIViewController {
                 let (userName, repoName) = self.extractFromUrl(url);
                 if let userName = userName, repoName = repoName {
                     print(userName, repoName)
-                    Starring.starRepo(userName: userName, repoName: repoName, completion: { (error) -> Void in
-                        if let error = error {
-                            self.showError(error)
-                        } else {
-                            self.showSuccess()
-                        }
-                    })
+                    self.loadRequest(userName: userName, repoName: repoName)
                 }
             } else {
                 NSLog("%@", error)
@@ -43,28 +37,51 @@ class ShareViewController: UIViewController {
         }
     }
     
+    func loadRequest(userName userName: String, repoName: String) {
+        dispatch_async(dispatch_get_main_queue(), {
+            () -> Void in
+            self.showLoading()
+        })
+        Starring.starRepo(userName: userName, repoName: repoName, completion: {
+            [weak self](error) -> Void in
+            if let weakSelf = self {
+                weakSelf.activityIndicator.stopAnimating()
+                weakSelf.activityIndicator.hidden = true
+                if let error = error {
+                    weakSelf.showError(error, userName: userName, repoName: repoName)
+                } else {
+                    weakSelf.showSuccess()
+                }
+            }
+        })
+    }
+    
     @IBAction func tapMessage(sender: AnyObject) {
         self.messageTapFunc?()
     }
     
-    func showError(error: NSError) {
-        self.activityIndicator.stopAnimating()
-        self.activityIndicator.hidden = true
-        self.messageButton.setTitle(error.localizedDescription, forState: .Normal)
+    func showError(error: NSError, userName: String, repoName: String) {
         self.messageButton.hidden = false
-        if error.code == ErrorCode.emptyToken.rawValue {
+        if error.domain == Error.domain {
+            self.messageButton.setTitle(error.localizedDescription, forState: .Normal)
             self.messageTapFunc = nil
         } else {
+            self.messageButton.setTitle("请求失败 点击重试", forState: .Normal)
             self.messageTapFunc = {
-                
+                self .loadRequest(userName: userName, repoName: repoName)
             }
         }
     }
     
+    func showLoading() {
+        self.activityIndicator.hidden = false
+        self.activityIndicator.startAnimating()
+        self.messageButton.hidden = true
+        self.messageButton.setTitle(nil, forState: .Normal)
+        self.messageTapFunc = nil;
+    }
+    
     func showSuccess() {
-        self.messageTapFunc = nil
-        self.activityIndicator.stopAnimating()
-        self.activityIndicator.hidden = true
         self.messageButton.setTitle("成功", forState: .Normal)
         self.messageButton.hidden = false
         self.messageTapFunc = nil
@@ -74,7 +91,8 @@ class ShareViewController: UIViewController {
             dispatch_get_main_queue(),
             {
                 self.close(0)
-            });
+            }
+        );
     }
     
     func extractFromUrl(url: String) -> (String?, String?) {
@@ -121,9 +139,6 @@ class ShareViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.activityIndicator.startAnimating()
-        self.messageButton.hidden = true
-        self.messageTapFunc = nil;
     }
     
     @IBAction func close(sender: AnyObject) {
