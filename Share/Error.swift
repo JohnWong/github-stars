@@ -12,6 +12,7 @@ enum ErrorCode: Int {
     case emptyToken = 1
     case shareType
     case shareFetch
+    case noRepo
 }
 
 class Error: NSObject {
@@ -27,6 +28,12 @@ class Error: NSObject {
     class func shareTypeError() -> NSError {
         return NSError(domain: domain, code: ErrorCode.shareType.rawValue, userInfo: [
             NSLocalizedDescriptionKey: "分享类型非文本或链接"
+        ])
+    }
+    
+    class func noRepoError() -> NSError {
+        return NSError(domain: domain, code: ErrorCode.noRepo.rawValue, userInfo: [
+            NSLocalizedDescriptionKey: "未找到Github项目地址"
         ])
     }
     

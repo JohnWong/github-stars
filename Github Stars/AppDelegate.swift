@@ -48,7 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let index: String.Index = query.startIndex.advancedBy(5)
             if let _ = query.rangeOfString("code=") {
                 let code = query.substringFromIndex(index)
-                ValueStore.code = code
                 NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: ConstValue.Notifications.didGetCode, object: code))
             }
         }

@@ -30,10 +30,17 @@ class ShareViewController: UIViewController {
                 if let userName = userName, repoName = repoName {
                     print(userName, repoName)
                     self.loadRequest(userName: userName, repoName: repoName)
+                    return
                 }
-            } else {
-                NSLog("%@", error)
             }
+            var err: NSError
+            if let error = error {
+                err = error
+            } else {
+                err = Error.noRepoError()
+            }
+            self.showError(err, userName: "", repoName: "")
+            NSLog("%@", err)
         }
     }
     
@@ -45,8 +52,6 @@ class ShareViewController: UIViewController {
         Starring.starRepo(userName: userName, repoName: repoName, completion: {
             [weak self](error) -> Void in
             if let weakSelf = self {
-                weakSelf.activityIndicator.stopAnimating()
-                weakSelf.activityIndicator.hidden = true
                 if let error = error {
                     weakSelf.showError(error, userName: userName, repoName: repoName)
                 } else {
@@ -60,11 +65,18 @@ class ShareViewController: UIViewController {
         self.messageTapFunc?()
     }
     
+    func stopLoading() {
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.hidden = true
+    }
+    
     func showError(error: NSError, userName: String, repoName: String) {
+        self.stopLoading()
         self.messageButton.hidden = false
         if error.domain == Error.domain {
             self.messageButton.setTitle(error.localizedDescription, forState: .Normal)
             self.messageTapFunc = nil
+            self.closeLater()
         } else {
             self.messageButton.setTitle("请求失败 点击重试", forState: .Normal)
             self.messageTapFunc = {
@@ -81,11 +93,8 @@ class ShareViewController: UIViewController {
         self.messageTapFunc = nil;
     }
     
-    func showSuccess() {
-        self.messageButton.setTitle("成功", forState: .Normal)
-        self.messageButton.hidden = false
-        self.messageTapFunc = nil
-        let sec: Int64 = 2 * Int64(NSEC_PER_SEC)
+    func closeLater() {
+        let sec: Int64 = Int64(1.8 * Double(NSEC_PER_SEC))
         dispatch_after(
             dispatch_time(DISPATCH_TIME_NOW, sec),
             dispatch_get_main_queue(),
@@ -95,6 +104,14 @@ class ShareViewController: UIViewController {
         );
     }
     
+    func showSuccess() {
+        self.stopLoading()
+        self.messageButton.setTitle("成功", forState: .Normal)
+        self.messageButton.hidden = false
+        self.messageTapFunc = nil
+        self.closeLater()
+    }
+    
     func extractFromUrl(url: String) -> (String?, String?) {
         let expression: NSRegularExpression?
         do {
@@ -102,7 +119,9 @@ class ShareViewController: UIViewController {
         } catch  {
             return (nil, nil)
         }
-        let result = expression!.matchesInString(url, options:NSMatchingOptions(rawValue: 0), range: NSRange(location: 0, length: url.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)))
+        
+        let range = NSRange(location: 0, length: (url as NSString).length)
+        let result = expression!.matchesInString(url, options:NSMatchingOptions(rawValue: 0), range: range)
         if let first = result.first {
             let range = Range(start: url.startIndex.advancedBy(first.range.location), end: url.startIndex.advancedBy(first.range.location + first.range.length))
             let matched = url.substringWithRange(range).substringFromIndex("github.com/".endIndex);
